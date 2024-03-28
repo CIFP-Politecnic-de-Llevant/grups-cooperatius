@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('usuari', function (Blueprint $table) {
             $table->id();
             $table->string('nom',255);
-            $table->string('cognom1',255);
-            $table->string('cognom2',255)->nullable(true);
-            $table->enum('sex',array('masculi','femeni'));
+            $table->string('cognoms',255);
         });
     }
 

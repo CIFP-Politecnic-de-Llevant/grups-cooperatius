@@ -21,7 +21,7 @@ class CursController extends Controller
      */
     public function create()
     {
-        //
+        return view('curs.create');
     }
 
     /**
@@ -29,7 +29,13 @@ class CursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+        ]);
+
+        Curs::create($request->all());
+
+        return redirect()->route('curs.index')->with('success', 'Curso creado correctamente.');
     }
 
     /**
@@ -37,7 +43,8 @@ class CursController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $curs = Curs::findOrFail($id);
+        return view('curs.show', compact('curs'));
     }
 
     /**
@@ -45,7 +52,8 @@ class CursController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $curs = Curs::findOrFail($id);
+        return view('curs.edit', compact('curs'));
     }
 
     /**
@@ -53,7 +61,14 @@ class CursController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+        ]);
+
+        $curs = Curs::findOrFail($id);
+        $curs->update($request->all());
+
+        return redirect()->route('curs.index')->with('success', 'Curso actualizado correctamente.');
     }
 
     /**
@@ -61,6 +76,9 @@ class CursController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $curs = Curs::findOrFail($id);
+        $curs->delete();
+
+        return redirect()->route('curs.index')->with('success', 'Curso eliminado correctamente.');
     }
 }

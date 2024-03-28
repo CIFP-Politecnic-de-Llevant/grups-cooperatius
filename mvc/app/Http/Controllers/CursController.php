@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curs;
 use Illuminate\Http\Request;
 
 class CursController extends Controller
@@ -11,7 +12,8 @@ class CursController extends Controller
      */
     public function index()
     {
-        //
+        $curs = Curs::all();
+        return view('curs.index',compact('curs'));
     }
 
     /**

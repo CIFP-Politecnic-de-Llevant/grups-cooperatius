@@ -1,0 +1,137 @@
+version: "3.9"
+services:
+  mf-grupscooperatius:
+    build:
+      context: ./web/mf-grupscooperatius
+      dockerfile: Dockerfile
+      target: develop-stage
+    container_name: mf-grupscooperatius_gestsuite-development
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    volumes:
+      - ./web/mf-grupscooperatius:/app:delegated
+    expose:
+      - 8088
+    ports:
+      - "8088:8088" #- 8082:8080 # 8080 in container, 8082 exposed
+    command: npm run start
+  db-core:
+    image: mysql:8
+    container_name: db-core_gestsuite-development
+    environment:
+      - MYSQL_ROOT_PASSWORD=joandev
+      - MYSQL_USER=joan
+      - MYSQL_PASSWORD=joandev
+      - MYSQL_DATABASE=gestsuite-core
+    volumes:
+      - db-core-storage-develop:/var/lib/mysql:delegated
+    expose:
+      - 3310
+    ports:
+      - "3310:3306"
+  db-grupscooperatius:
+    image: mysql:8
+    container_name: db-grupscooperatius_gestsuite-development
+    environment:
+      - MYSQL_ROOT_PASSWORD=joandev
+      - MYSQL_USER=joan
+      - MYSQL_PASSWORD=joandev
+      - MYSQL_DATABASE=gestsuite-grupscooperatius
+    volumes:
+      - db-grupscooperatius-storage-develop:/var/lib/mysql:delegated
+    expose:
+      - 3309
+    ports:
+      - "3309:3306"
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: gestsuite_phpmyadmin-development
+    environment:
+      - PMA_HOSTS=db-core,db-grupscooperatius
+      - UPLOAD_LIMIT=300M
+    ports:
+      - "8083:80"
+    volumes:
+      - /sessions
+    depends_on:
+      - db-core
+      - db-grupscooperatius
+  ms-eureka-server:
+    build:
+      context: ./api/gestsuite-eureka-server
+      dockerfile: Dockerfile
+      target: develop-stage-eureka
+    working_dir: /app
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    volumes:
+      - ./api/gestsuite-eureka-server:/app
+    ports:
+      - "8761:8761"
+  ms-gateway:
+    build:
+      context: ./
+      dockerfile: ./api/gestsuite-gateway/Dockerfile
+      target: develop-stage-gateway
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    volumes:
+      - ./api/gestsuite-gateway:/app
+    ports:
+      - "8090:8090"
+      - "35731:35731"
+    healthcheck:
+      test: "curl --fail --silent ms-gateway:8090/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    depends_on:
+      - ms-eureka-server
+  ms-core:
+    build:
+      context: ./
+      dockerfile: ./api/gestsuite-core/Dockerfile
+      target: develop-stage-core
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    volumes:
+      - ./api/gestsuite-core:/app
+    healthcheck:
+      test: "curl --fail --silent ms-gateway:8090/api/core/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    ports:
+      - "35729:35729"
+    depends_on:
+      - ms-eureka-server
+      - db-core
+  ms-grupscooperatius:
+    build:
+      context: ./
+      dockerfile: ./api/gestsuite-grups-cooperatius/Dockerfile
+    depends_on:
+      - ms-eureka-server
+      - db-grupscooperatius
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    volumes:
+      - ./api/gestsuite-grups-cooperatius:/app
+    command: ./mvnw spring-boot:run -Dspring-boot.run.profiles=docker
+    ports:
+      - "35733:35733"
+  laravel-php:
+    container_name: laravel-php
+    build:
+      context: .
+      dockerfile: ./grups/grups-cooperatius/Dockerfile
+      target: laravel
+    ports:
+      - "8100:8000"
+    volumes:
+      - ./grups/grups-cooperatius:/var/www/html
+volumes:
+  db-core-storage-develop:
+  db-grupscooperatius-storage-develop:

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -11,7 +12,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+        return view('item.index', compact('items'));
     }
 
     /**
@@ -19,7 +21,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('item.create');
     }
 
     /**
@@ -27,7 +29,13 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tipo' => 'required',
+        ]);
+
+        Item::create($request->all());
+
+        return redirect()->route('item.index')->with('success', 'Item creado satisfactoriamente');
     }
 
     /**
@@ -35,7 +43,8 @@ class ItemController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $item = Item::findOrFail($id);
+        return view('item.show', compact('item'));
     }
 
     /**
@@ -43,7 +52,8 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Item::findOrFail($id);
+        return view('item.edit', compact('item'));
     }
 
     /**
@@ -51,7 +61,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'tipo' => 'required',
+        ]);
+
+        $item = Item::findOrFail($id);
+        $item->update($request->all());
+
+        return redirect()->route('item.index')->with('success', 'Item actualizado satisfactoriamente');
     }
 
     /**
@@ -59,6 +76,9 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('item.index')->with('success', 'Item eliminado satisfactoriamente');
     }
 }

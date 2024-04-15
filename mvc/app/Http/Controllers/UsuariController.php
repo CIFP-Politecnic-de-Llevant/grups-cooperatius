@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
 
@@ -34,7 +33,7 @@ class UsuariController extends Controller
             'nom' => 'required|string|max:255',
         ]);
 
-        Item::create($request->all());
+        Usuari::create($request->all());
 
         return redirect()->route('usuari.index')->with('success', 'Usuari registrat correctament');
     }
@@ -67,6 +66,9 @@ class UsuariController extends Controller
         ]);
 
         $usuari = Usuari::findOrFail($id);
+        $usuari->update($request->all());
+
+        return redirect()->route('usuari.index')->with('success', 'Usuari actualitzat correctament');
     }
 
     /**

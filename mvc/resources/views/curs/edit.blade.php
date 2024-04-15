@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Editar Curs</h1>
-    <form action="{{ route('curs.update', $curs->id) }}" method="POST">
+    <h1>{{ isset($curs) ? 'Editar Curso' : 'Crear Curso' }}</h1>
+    <form action="{{ isset($curs) ? route('curs.update', $curs->id) : route('curs.store') }}" method="POST">
         @csrf
-        @method('PUT')
+        @if(isset($curs))
+            @method('PUT')
+        @endif
         <div class="form-group">
-            <label for="nombre">Nom del Curs:</label>
-            <input type="text" class="form-control" id="nombre" name="nom" value="{{ $curs->nom }}">
+            <label for="nombre">Nombre del Curso:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ isset($curs) ? $curs->nom : '' }}">
         </div>
-        <button type="submit" class="btn btn-primary">Actualitzar</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 @endsection

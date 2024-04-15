@@ -21,7 +21,7 @@ class CursController extends Controller
      */
     public function create()
     {
-        return view('curs.create');
+        return view('curs.edit');
     }
 
     /**
@@ -33,9 +33,18 @@ class CursController extends Controller
             'nom' => 'required|string|max:255',
         ]);
 
+        /*if ($request->has('id')){
+            $curs = Curs::findOrFail($request->id);
+            $curs->update($request->all());
+            $mensaje = 'Actualizado correctamente';
+        }else{
+            Curs::create($request->all());
+            $mensaje = 'Creado correctamente';
+        }*/
+
         Curs::create($request->all());
 
-        return redirect()->route('curs.index')->with('success', 'Curso creado correctamente.');
+        return redirect()->route('curs.index')->with('success', 'Creado correctamente');
     }
 
     /**

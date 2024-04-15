@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\Usuari;
 use Illuminate\Http\Request;
 
 class UsuariController extends Controller
@@ -11,7 +13,8 @@ class UsuariController extends Controller
      */
     public function index()
     {
-        //
+        $usuari = Usuari::all();
+        return view('usuari.index', compact('usuari'));
     }
 
     /**
@@ -19,7 +22,7 @@ class UsuariController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuari.create');
     }
 
     /**
@@ -27,7 +30,13 @@ class UsuariController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+        ]);
+
+        Item::create($request->all());
+
+        return redirect()->route('usuari.index')->with('success', 'Usuari registrat correctament');
     }
 
     /**
@@ -35,7 +44,8 @@ class UsuariController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $usuari = Usuari::findOrFail($id);
+        return view('usuari.show', compact('usuari'));
     }
 
     /**
@@ -43,7 +53,8 @@ class UsuariController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $usuari = Usuari::findOrFail($id);
+        return view('usuari.edit', compact('usuari'));
     }
 
     /**
@@ -51,7 +62,11 @@ class UsuariController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+        ]);
+
+        $usuari = Usuari::findOrFail($id);
     }
 
     /**
@@ -59,6 +74,9 @@ class UsuariController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $usuari = Usuari::findOrFail($id);
+        $usuari->delete();
+
+        return redirect()->route('usuari.index')->with('success', 'Usuari eliminat correctament');
     }
 }

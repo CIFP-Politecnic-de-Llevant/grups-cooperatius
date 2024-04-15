@@ -12,6 +12,6 @@ class Curs extends Model
     protected $table = 'curs';
 
     protected $fillable = [
-      'nom'
+        'nom'
     ];
 }

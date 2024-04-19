@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Listado de Cursos</h1>
-    <a href="{{ route('curs.edit') }}" class="btn btn-primary">Crear Nou Curs</a>
+    <a href="{{ route('curs.create') }}" class="btn btn-primary">Crear Nou Curs</a>
     <table class="table">
         <thead>
         <tr>

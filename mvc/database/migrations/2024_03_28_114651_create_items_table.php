@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('item', function (Blueprint $table) {
             $table->id();
-
+            $table->unsignedBigInteger('usuari_id');
+            $table->string('tipo',255);
+            $table->enum('valor',['HOME','DONA','EXCELENT','SUSPEN','NOTABLE','APROVAT']);
+            $table->foreign('usuari_id')->references('id')->on('usuari')->onDelete('cascade');
         });
     }
 

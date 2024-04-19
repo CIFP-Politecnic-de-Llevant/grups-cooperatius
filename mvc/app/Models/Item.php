@@ -15,4 +15,9 @@ class Item extends Model
         'tipo',
         'valor'
     ];
+
+    public function usuari()
+    {
+        return $this->belongsTo(Usuari::class, 'usuari_id');
+    }
 }

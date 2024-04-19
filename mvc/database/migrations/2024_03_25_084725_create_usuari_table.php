@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom',255);
             $table->string('cognoms',255);
+            $table->unsignedBigInteger('curs_id');
+            $table->foreign('curs_id')->references('id')->on('curs')->onDelete('cascade');
         });
     }
 

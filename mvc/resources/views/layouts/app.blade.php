@@ -21,6 +21,9 @@
                 <li>
                     <a class="nav-link" href="{{route('usuari.index')}}">Alumnes</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{route('item.index')}}">Alumnes</a>
+                </li>
             </ul>
         </div>
     </div>

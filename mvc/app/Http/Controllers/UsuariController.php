@@ -21,7 +21,7 @@ class UsuariController extends Controller
      */
     public function create()
     {
-        return view('usuari.create');
+        return view('usuari.edit');
     }
 
     /**

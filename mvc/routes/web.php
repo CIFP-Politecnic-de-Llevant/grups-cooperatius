@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CursController;
+use App\Http\Controllers\UsuariController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('curs',CursController::class);
+Route::resource('alumnes',UsuariController::class);

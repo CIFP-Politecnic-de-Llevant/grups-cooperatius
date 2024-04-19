@@ -15,7 +15,8 @@ class Item extends Model
 
     protected $fillable = [
         'tipo',
-        'valor'
+        'valor',
+        'usuari_id'
     ];
 
     public function usuari()

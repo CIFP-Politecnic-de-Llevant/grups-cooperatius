@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Usuari;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -21,7 +22,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('item.create');
+        $usuari = Usuari::all();
+        return view('item.create', compact('usuari'));
     }
 
     /**

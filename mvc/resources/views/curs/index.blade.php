@@ -7,8 +7,9 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Acciones</th>
+            <th>Nom</th>
+
+            <th>Accions</th>
         </tr>
         </thead>
         <tbody>

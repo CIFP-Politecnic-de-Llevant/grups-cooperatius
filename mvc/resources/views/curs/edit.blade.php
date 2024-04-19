@@ -8,8 +8,8 @@
             @method('PUT')
         @endif
         <div class="form-group">
-            <label for="nombre">Nombre del Curso:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ isset($curs) ? $curs->nom : '' }}">
+            <label for="nombre">Nom del Curso:</label>
+            <input type="text" class="form-control" id="nom" name="nom" value="{{ isset($curs) ? $curs->nom : '' }}">
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>

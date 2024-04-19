@@ -22,7 +22,7 @@
                     <a class="nav-link" href="{{route('usuari.index')}}">Alumnes</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{route('item.index')}}">Alumnes</a>
+                    <a class="nav-link" href="{{route('item.index')}}">Items</a>
                 </li>
             </ul>
         </div>

@@ -16,7 +16,7 @@ class Usuari extends Model
     protected $fillable = [
         'nom',
         'cognoms',
-        'curs',
+        'curs_id',
         'items'
     ];
 

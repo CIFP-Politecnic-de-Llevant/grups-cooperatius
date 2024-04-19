@@ -19,8 +19,8 @@
                 <td>{{ $usuari->nom }}</td>
                 <td>{{$usuari->cognoms}}</td>
                 <td>
-                    <a href="{{ route('curs.edit', $usuari->id) }}" class="btn btn-primary">Editar</a>
-                    <form action="{{ route('curs.destroy', $usuari->id) }}" method="POST">
+                    <a href="{{ route('$usuari.edit', $usuari->id) }}" class="btn btn-primary">Editar</a>
+                    <form action="{{ route('$usuari.destroy', $usuari->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>

@@ -19,7 +19,7 @@
             <label for="curs_id">Curs:</label>
             <select class="form-control" id="curs_id" name="curs_id">
                 @foreach($cursos as $curs)
-                    <option value="{{ isset($usuaris) && $usuaris->curs_id == $curs->id ? 'selected' : '' }}">
+                    <option value="{{$curs->id}}">
                         {{ $curs->nom }}
                     </option>
                 @endforeach

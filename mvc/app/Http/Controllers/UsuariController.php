@@ -33,6 +33,7 @@ class UsuariController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
+            'curs_id' => 'required',
         ]);
 
         Usuari::create($request->all());

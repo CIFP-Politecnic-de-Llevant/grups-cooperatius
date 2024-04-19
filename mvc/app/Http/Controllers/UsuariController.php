@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curs;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class UsuariController extends Controller
      */
     public function create()
     {
-        return view('usuari.edit');
+        $cursos = Curs::all();
+        return view('usuari.edit',compact('cursos'));
     }
 
     /**
@@ -53,7 +55,8 @@ class UsuariController extends Controller
     public function edit(string $id)
     {
         $usuari = Usuari::findOrFail($id);
-        return view('usuari.edit', compact('usuari'));
+        $cursos = Curs::all();
+        return view('usuari.edit', compact('usuari'),compact('cursos'));
     }
 
     /**

@@ -11,6 +11,8 @@ class Curs extends Model
 
     protected $table = 'curs';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'nom'
     ];

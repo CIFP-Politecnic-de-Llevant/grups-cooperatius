@@ -11,6 +11,8 @@ class Usuari extends Model
 
     protected $table = 'usuari';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'nom',
         'cognoms',

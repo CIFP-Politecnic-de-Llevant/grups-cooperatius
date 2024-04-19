@@ -11,6 +11,8 @@ class Item extends Model
 
     protected $table = 'item';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'tipo',
         'valor'

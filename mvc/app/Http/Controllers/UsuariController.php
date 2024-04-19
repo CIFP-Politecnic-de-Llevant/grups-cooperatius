@@ -12,8 +12,8 @@ class UsuariController extends Controller
      */
     public function index()
     {
-        $usuari = Usuari::all();
-        return view('usuari.index', compact('usuari'));
+        $usuaris = Usuari::all();
+        return view('usuari.index', compact('usuaris'));
     }
 
     /**

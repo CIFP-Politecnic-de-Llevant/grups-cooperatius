@@ -12,8 +12,8 @@ class CursController extends Controller
      */
     public function index()
     {
-        $curs = Curs::all();
-        return view('curs.index',compact('curs'));
+        $cursos = Curs::all();
+        return view('curs.index',compact('cursos'));
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Listado de Alumnos</h1>
+    <h1>Listat de Alumnes</h1>
     <a href="{{route('usuari.create')}}" class="btn btn-primary">Crear Nou Alumne</a>
     <table class="table">
         <thead>
@@ -30,3 +30,4 @@
         @endforeach
         </tbody>
     </table>
+@endsection

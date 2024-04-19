@@ -12,7 +12,7 @@ class CursController extends Controller
      */
     public function index()
     {
-        $cursos = Curs::all();
+        $cursos = Curs::orderBy('nom')->get();
         return view('curs.index',compact('cursos'));
     }
 

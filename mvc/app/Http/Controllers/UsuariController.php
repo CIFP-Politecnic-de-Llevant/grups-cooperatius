@@ -22,7 +22,7 @@ class UsuariController extends Controller
      */
     public function create()
     {
-        $cursos = Curs::all();
+        $cursos = Curs::orderBy('nom')->get();
         return view('usuari.edit',compact('cursos'));
     }
 
@@ -56,7 +56,7 @@ class UsuariController extends Controller
     public function edit(string $id)
     {
         $usuari = Usuari::findOrFail($id);
-        $cursos = Curs::all();
+        $cursos = Curs::orderBy('nom')->get();
         return view('usuari.edit', compact('usuari'),compact('cursos'));
     }
 

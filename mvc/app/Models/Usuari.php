@@ -22,7 +22,7 @@ class Usuari extends Model
 
     public function curs()
     {
-        return $this->belongsTo(Curs::class, 'curs');
+        return $this->belongsTo(Curs::class, 'curs_id');
     }
 
     public function amics()

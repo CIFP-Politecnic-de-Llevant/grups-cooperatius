@@ -20,4 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('curs',CursController::class);
-Route::resource('alumnes',UsuariController::class);
+Route::resource('usuari',UsuariController::class);

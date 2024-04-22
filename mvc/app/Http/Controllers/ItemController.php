@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curs;
 use App\Models\Item;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
@@ -22,8 +23,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $usuari = Usuari::all();
-        return view('item.create', compact('usuari'));
+        $usuaris = Usuari::all();
+        return view('item.edit', compact('usuaris'));
     }
 
     /**
@@ -55,7 +56,8 @@ class ItemController extends Controller
     public function edit(string $id)
     {
         $item = Item::findOrFail($id);
-        return view('item.edit', compact('item'));
+        $usuari = Usuari::findOrFail($id);
+        return view('item.edit', compact('item'), compact('usuari'));
     }
 
     /**

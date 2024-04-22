@@ -19,8 +19,8 @@
                 <td>{{ $item->tipo }}</td>
                 <td>{{$item->valor}}</td>
                 <td>
-                    <a href="{{ route('item.edit', $usuari->id) }}" class="btn btn-primary">Editar</a>
-                    <form action="{{ route('item.destroy', $usuari->id) }}" method="POST">
+                    <a href="{{ route('item.edit', $item->id) }}" class="btn btn-primary">Editar</a>
+                    <form action="{{ route('item.destroy', $item->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>

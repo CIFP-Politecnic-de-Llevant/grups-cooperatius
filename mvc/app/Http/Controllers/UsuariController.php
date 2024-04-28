@@ -85,4 +85,50 @@ class UsuariController extends Controller
 
         return redirect()->route('usuari.index')->with('success', 'Usuari eliminat correctament');
     }
+
+    public function amics($id)
+    {
+        $usuari = Usuari::findOrFail($id);
+        $amics = $usuari->amics();
+        return view('usuari.amics', compact('usuari', 'amics'));
+    }
+
+    public function enemics($id)
+    {
+        $usuari = Usuari::findOrFail($id);
+        $enemics = $usuari->enemics();
+        return view('usuari.enemics', compact('usuari', 'enemics'));
+    }
+
+    public function amistats($id)
+    {
+        $usuari = Usuari::findOrFail($id);
+        $amistats = $usuari->amistats();
+        return view('usuari.amistats', compact('usuari', 'amistats'));
+    }
+
+    public function enemistats($id)
+    {
+        $usuari = Usuari::findOrFail($id);
+        $enemistats = $usuari->enemistats();
+        return view('usuari.enemistats', compact('usuari', 'enemistats'));
+    }
+
+    public function relacions()
+    {
+        $usuari = Usuari::all();
+
+        $relacions = [];
+        foreach ($usuari as $usuari) {
+            $amistats = $usuari->amistats()->get();
+            $enemistats = $usuari->enemistats()->get();
+
+            $relacions[] = [
+                'nom' => $usuari->nom,
+                'amistats' => $amistats,
+                'enemistats' => $enemistats,
+            ];
+        }
+        return view('usuari.relacions', compact('relacions'));
+    }
 }

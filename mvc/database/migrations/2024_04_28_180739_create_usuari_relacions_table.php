@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('usuari_id');
             $table->unsignedBigInteger('ami_ene_id');
-            $table->enum('relacion_tipo', ['amic', 'enemic']);
+            $table->enum('relacion_tipo', ['amic', 'enemic', 'amistat', 'enemistat']);
 
             $table->foreign('usuari_id')->references('id')->on('usuari')->onDelete('cascade');
             $table->foreign('ami_ene_id')->references('id')->on('usuari')->onDelete('cascade');

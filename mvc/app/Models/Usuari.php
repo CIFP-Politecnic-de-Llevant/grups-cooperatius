@@ -27,12 +27,12 @@ class Usuari extends Model
 
     public function amics()
     {
-        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'amic_id')->wherePivot('relacion_tipo','amic');
+        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'ami_ene_id')->wherePivot('relacion_tipo','amic');
     }
 
     public function enemics()
     {
-        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'enemic_id')->wherePivot('relacion_tipo','enemic');
+        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'ami_ene_id')->wherePivot('relacion_tipo','enemic');
     }
 
     public function items()
@@ -42,12 +42,12 @@ class Usuari extends Model
 
     public function amistats()
     {
-        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'amistat_id')->wherePivot('relacion_tipo','amistat');
+        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'ami_ene_id')->wherePivot('relacion_tipo','amistat');
     }
 
     public function enemistats()
     {
-        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'enemistat_id')->wherePivot('relacion_tipo','enemistat');
+        return $this->belongsToMany(Usuari::class, 'usuari_relacions', 'id', 'ami_ene_id')->wherePivot('relacion_tipo','enemistat');
     }
 
     public function amistatsR()
